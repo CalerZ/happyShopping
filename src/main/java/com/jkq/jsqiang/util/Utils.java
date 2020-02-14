@@ -17,6 +17,5 @@ public class Utils {
         String dateStr = sdf.format(new Date());
         return dateStr;
 
-
     }
 }
