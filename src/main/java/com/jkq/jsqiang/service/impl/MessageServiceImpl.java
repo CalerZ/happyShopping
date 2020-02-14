@@ -1,6 +1,7 @@
 package com.jkq.jsqiang.service.impl;
 
 import com.jkq.jsqiang.entity.Message;
+import com.jkq.jsqiang.entity.MessageWithBLOBs;
 import com.jkq.jsqiang.entity.User;
 import com.jkq.jsqiang.mapper.MessageMapper;
 import com.jkq.jsqiang.service.MessageService;
@@ -48,5 +49,16 @@ public class MessageServiceImpl implements MessageService {
     public Message findByPrimaryKey(Integer id) {
 
         return  messageMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public boolean reply(MessageWithBLOBs message) {
+        try {
+            messageMapper.updateByPrimaryKey(message);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

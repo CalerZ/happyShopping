@@ -46,7 +46,7 @@ public class ShoppingServiceImpl implements ShoppingService {
     public List<Shopping>  findByName(String name) {
         ShoppingExample example = new ShoppingExample();
         ShoppingExample.Criteria criteria = example.createCriteria();
-        criteria.andNameLike(name);
+        criteria.andUsernameEqualTo(name);
         List<Shopping> shoppings = shoppingMapper.selectByExample(example);
         return shoppings;
     }

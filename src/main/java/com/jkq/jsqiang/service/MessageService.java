@@ -1,6 +1,7 @@
 package com.jkq.jsqiang.service;
 
 import com.jkq.jsqiang.entity.Message;
+import com.jkq.jsqiang.entity.MessageWithBLOBs;
 import com.jkq.jsqiang.entity.User;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public interface MessageService {
     boolean findByName(String name);
 
     Message findByPrimaryKey(Integer id);
+
+    boolean reply(MessageWithBLOBs message);
 }

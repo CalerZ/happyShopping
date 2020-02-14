@@ -68,4 +68,16 @@ public class UserController {
     }
 
 
+    @PostMapping("/recharge")
+    public Result recharge(Integer id,String money){
+        User user = new User();
+        user.setUserid(id);
+        user.setMoney(Integer.getInteger(money));
+
+        userService.update(user);
+        return new Result(true,"修改成功",true,0);
+    }
+
+
+
 }
