@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-//    @Cacheable(cacheNames ="user",key= "'user_'+#result.userid")
+    @CachePut(cacheNames ="user",key= "'user_'+#result.userid")
     public User add(User user) {
         userMapper.insertSelectiveForUser(user);
         return user;
@@ -36,15 +36,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-//    @CacheEvict(cacheNames ="user",beforeInvocation = true,key= "'user_'+#id")
+    @CacheEvict(cacheNames ="user",beforeInvocation = true,key= "'user_'+#id")
     public int delete(Integer id) {
         return 0;
     }
 
     @Override
-//    @CachePut(cacheNames ="user", key= "'user_'+#result.userid")
+    @CachePut(cacheNames ="user", key= "'user_'+#result.userid")
     public User update(User user) {
-
         userMapper.updateByPrimaryKeySelective(user);
         return user;
 
@@ -65,7 +64,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-//    @Cacheable(cacheNames ="user",key= "'user_'+#result.userid")
+    @CachePut(cacheNames ="user",key= "'user_'+#id")
     public User findByPrimaryKey(Integer id) {
 
         return userMapper.selectByPrimaryKey(id);

@@ -20,5 +20,7 @@ public class FoodsController {
     public Result findPage(String state, String paisong, String username, Integer page, @RequestParam(name = "num",value = "7") Integer num ){
         Foods foods = new Foods();
         foods.setState(state);
+
+        return  new Result();
     }
 }
