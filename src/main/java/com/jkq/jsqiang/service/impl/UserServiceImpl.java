@@ -1,5 +1,7 @@
 package com.jkq.jsqiang.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jkq.jsqiang.entity.User;
 import com.jkq.jsqiang.entity.UserExample;
 import com.jkq.jsqiang.mapper.UserMapper;
@@ -36,10 +38,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @CacheEvict(cacheNames ="user",beforeInvocation = true,key= "'user_'+#id")
-    public int delete(Integer id) {
-        return 0;
+    public boolean delete(String id) {
+        int i = userMapper.deleteByPrimaryKey( Integer.parseInt(id) );
+        return true;
     }
+
+    @Override
+    public PageInfo<User> list(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(1,10);
+        List<User> users = userMapper.selectByExample(new UserExample());
+        PageInfo<User> info = new PageInfo<>(users);
+
+        return info;
+    }
+
+
 
     @Override
     @CachePut(cacheNames ="user", key= "'user_'+#result.userid")

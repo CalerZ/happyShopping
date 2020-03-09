@@ -1,5 +1,6 @@
 package com.jkq.jsqiang.service;
 
+import com.github.pagehelper.PageInfo;
 import com.jkq.jsqiang.entity.Foods;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +19,6 @@ public interface FoodsService {
     List<Foods> selectAll();
     int delete(Integer ids);
     int update(Foods foods);
-
+    PageInfo<Foods> list(Integer pageNum, Integer pageSize);
+    Foods selectOne(Integer id);
 }

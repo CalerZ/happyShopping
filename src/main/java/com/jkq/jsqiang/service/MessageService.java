@@ -15,7 +15,8 @@ import java.util.List;
 public interface MessageService {
 
 
-    int add(Message message);
+    int add(MessageWithBLOBs message);
+
     List<Message> selectAll();
     int delete(Integer ids);
     int update(Message message);

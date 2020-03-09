@@ -1,5 +1,7 @@
 package com.jkq.jsqiang.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.jkq.jsqiang.entity.Shopping;
 import com.jkq.jsqiang.entity.ShoppingExample;
 import com.jkq.jsqiang.entity.User;
@@ -39,7 +41,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 
     @Override
     public int update(Shopping shopping) {
-        return 0;
+        int i = shoppingMapper.updateByPrimaryKey(shopping);
+        return i;
     }
 
     @Override
@@ -49,6 +52,30 @@ public class ShoppingServiceImpl implements ShoppingService {
         criteria.andUsernameEqualTo(name);
         List<Shopping> shoppings = shoppingMapper.selectByExample(example);
         return shoppings;
+    }
+
+    @Override
+    public PageInfo<Shopping> findByCont(Shopping shopping, int pageNum, int pageSize) {
+        ShoppingExample shoppingExample = new ShoppingExample();
+        shoppingExample.createCriteria().andUsernameEqualTo(shopping.getUsername())
+                                        .andFoodsstatusEqualTo(shopping.getFoodsstatus())
+                                        .andPhoneLike("%"+shopping.getPhone()+"%")
+                                        .andTransportstatusEqualTo(shopping.getTransportstatus());
+        PageHelper.startPage(pageNum,pageSize);
+        List<Shopping> shoppings = shoppingMapper.selectByExample(shoppingExample);
+        PageInfo<Shopping> info = new PageInfo<>(shoppings);
+        return info;
+    }
+
+    @Override
+    public PageInfo<Shopping> selectShopping(Integer pageNum, Integer pageSize) {
+        ShoppingExample shoppingExample = new ShoppingExample();
+        shoppingExample.createCriteria().andFoodsstatusEqualTo("已购买");
+
+        PageHelper.startPage(pageNum,pageSize);
+        List<Shopping> shoppings = shoppingMapper.selectByExample(shoppingExample);
+        PageInfo<Shopping> info = new PageInfo<>(shoppings);
+        return info;
     }
 
     @Override

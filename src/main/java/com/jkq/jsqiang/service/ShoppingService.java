@@ -1,5 +1,6 @@
 package com.jkq.jsqiang.service;
 
+import com.github.pagehelper.PageInfo;
 import com.jkq.jsqiang.entity.Shopping;
 import com.jkq.jsqiang.entity.User;
 
@@ -19,7 +20,8 @@ public interface ShoppingService {
     int delete(Integer id);
     int update(Shopping shopping);
 
-
     Shopping findByPrimaryKey(Integer id);
     List<Shopping> findByName(String name);
+    PageInfo<Shopping> findByCont(Shopping shopping, int pageNum, int pageSize);
+    PageInfo<Shopping> selectShopping(Integer pageNum, Integer pageSize);
 }

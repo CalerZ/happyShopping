@@ -1,13 +1,10 @@
-package com.jkq.jsqiang.action;
+package com.jkq.jsqiang.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.jkq.jsqiang.entity.Result;
+import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * @author Caler_赵康乐
@@ -16,10 +13,12 @@ import java.util.List;
  */
 
 
+@Api(value = "测试类",tags = "测试")
 @RestController
 public class TestAction {
 
-
+    @ApiOperation(value = "测试接口",notes = "测试接口")
+    @ApiResponse(code = 0, message = "hello", response = Result.class)
     @GetMapping("/hello")
     public String  hello(){
         return "hello";

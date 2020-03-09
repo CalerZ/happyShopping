@@ -1,4 +1,4 @@
-package com.jkq.jsqiang.action;
+package com.jkq.jsqiang.controller;
 
 import com.jkq.jsqiang.entity.Result;
 import org.springframework.web.bind.annotation.RequestMapping;

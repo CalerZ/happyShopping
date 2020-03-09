@@ -1,9 +1,10 @@
-package com.jkq.jsqiang.action;
+package com.jkq.jsqiang.controller;
 
 import com.jkq.jsqiang.entity.Message;
 import com.jkq.jsqiang.entity.MessageWithBLOBs;
 import com.jkq.jsqiang.entity.Result;
 import com.jkq.jsqiang.service.MessageService;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import java.util.Map;
  * @create 2020-02-14 10:59
  * @description :
  */
+@Api(value = "评论",tags = "评论控制类")
 @RequestMapping("/message")
 @RestController
 public class MessageController {
@@ -27,12 +29,12 @@ public class MessageController {
     MessageService messageService;
 
 
-    /**
-     * 6.	获取商品评论
-     * @param id
-     * @return
-     */
-    @GetMapping("/findById")
+    @ApiOperation(value = "获取商品评论",notes = "根据id获取商品评论")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id",value="id",required=true)
+    })
+    @ApiResponse(code = 0, message = "Result", response = Result.class)
+    @PostMapping("/findById")
     public Result findById(Integer id){
         Message msg = messageService.findByPrimaryKey(id);
         return new Result(true,"success",msg,0);
@@ -48,6 +50,15 @@ public class MessageController {
      * @param Content
      * @return
      */
+    @ApiOperation(value = "提交商品评论",notes = "提交商品评论")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="username",value="username",required=true),
+            @ApiImplicitParam(name="name",value="name",required=true),
+            @ApiImplicitParam(name="price",value="price",required=true),
+            @ApiImplicitParam(name="time",value="username",required=true),
+            @ApiImplicitParam(name="Content",value="Content",required=true)
+    })
+    @ApiResponse(code = 0, message = "Result", response = Result.class)
     @PostMapping("/add")
     public Result add(String  username,String  name,String  price,String  time,String  Content){
 
@@ -62,6 +73,13 @@ public class MessageController {
         return new Result(true,"success",message,0);
     }
 
+    @ApiOperation(value = "reply",notes = "reply")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name="id",value="id",required=true),
+            @ApiImplicitParam(name="time",value="time",required=true),
+            @ApiImplicitParam(name="content",value="content",required=true)
+    })
+    @ApiResponse(code = 0, message = "Result", response = Result.class)
     @PostMapping("/reply")
     public Result add(Integer  id,String  time,String  content){
 

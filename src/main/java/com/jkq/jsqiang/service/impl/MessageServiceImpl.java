@@ -21,8 +21,8 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     MessageMapper messageMapper;
     @Override
-    public int add(Message message) {
-        return 0;
+    public int add(MessageWithBLOBs message) {
+        return messageMapper.insertSelective(message);
     }
 
     @Override
