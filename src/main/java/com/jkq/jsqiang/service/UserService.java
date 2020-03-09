@@ -18,7 +18,7 @@ public interface UserService {
     List<User> selectAll();
     boolean delete(String ids);
     User update(User foods);
-    boolean findByName(String name);
+    List<User> findByName(String name);
     User findByPrimaryKey(Integer id);
     PageInfo<User> list(Integer pageNum, Integer pageSize);
 }

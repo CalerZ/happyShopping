@@ -45,8 +45,8 @@ public class UserController {
         if(name==null || "".equals(name)){
             return new Result(false,"姓名不能为空", user,102);
         }
-        boolean isExist = userService.findByName(name);
-        if(isExist){
+        List<User> userList = userService.findByName(name);
+        if(userList.size()>0){
             return new Result(false,"姓名已存在", user,101);
         }
         userService.add(user);
@@ -60,10 +60,8 @@ public class UserController {
     })
     @PostMapping("/findByName")
     public Result findByName(String name){
-        boolean isExist = userService.findByName(name);
-        JSONObject res = new JSONObject();
-        res.put("isExist",isExist);
-        return new Result(true,"success", res,0);
+        List<User> userList = userService.findByName(name);
+        return new Result(true,"success", userList,0);
     }
 
 
@@ -80,12 +78,10 @@ public class UserController {
 
     @ApiOperation(value = "人员分页查询",notes = "人员分页查询")
     @ApiImplicitParams({
-            @ApiImplicitParam(name="pageNum",value="页数",required=true),
-            @ApiImplicitParam(name="pageSize",value="行数",required=true)
     })
     @ApiResponse(code = 0, message = "userPageInfo", response = Result.class)
     @GetMapping("/findAll")
-    public Result findByName(int pageNum, int pageSize){
+    public Result selectAll(){
         List<User> users = userService.selectAll();
         return new Result(true,"success", users,0);
     }
@@ -109,7 +105,7 @@ public class UserController {
         user.setEmail(email);
         user.setPhone(phone);
         user.setAddress(address);
-        user.setDescribe(describe);
+        user.setDescription(describe);
         userService.update(user);
         return new Result(true,"success", user,0);
     }
@@ -162,7 +158,7 @@ public class UserController {
         user.setEmail(eamil);
         user.setAddress(address);
         user.setPhone(phone);
-        user.setDescribe(describe);
+        user.setDescription(describe);
         user.setIsmanager(Integer.parseInt(isManager) );
         userService.add(user);
         return new Result(true,"success", user,0);

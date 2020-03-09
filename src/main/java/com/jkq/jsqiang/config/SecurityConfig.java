@@ -14,7 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @create 2020-02-13 18:15
  * @description :
  */
-@EnableWebSecurity
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -49,6 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui.html")
                 .antMatchers("/v2/**")
                 .antMatchers("/swagger-resources/**");
-
+        web.ignoring().antMatchers("/**");
     }
 }

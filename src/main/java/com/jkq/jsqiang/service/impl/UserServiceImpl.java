@@ -7,9 +7,7 @@ import com.jkq.jsqiang.entity.UserExample;
 import com.jkq.jsqiang.mapper.UserMapper;
 import com.jkq.jsqiang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,15 +24,16 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    @CachePut(cacheNames ="user",key= "'user_'+#result.userid")
+//    @CachePut(cacheNames ="user",key= "'user_'+#result.userid")
     public User add(User user) {
-        userMapper.insertSelectiveForUser(user);
+        userMapper.insertSelective(user);
         return user;
     }
 
     @Override
     public List<User> selectAll() {
-        return null;
+
+        return userMapper.selectByExample(new UserExample());
     }
 
     @Override
@@ -63,17 +62,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean findByName(String name) {
+    public List<User> findByName(String name) {
         boolean isExist=false;
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
-        criteria.andUsernameEqualTo(name);
+        criteria.andUsernameLike("%"+name+"%");
         List<User> users = userMapper.selectByExample(userExample);
-        if(users.size()>0){
-            isExist=true;
-        }
-
-        return isExist;
+        return users;
     }
 
     @Override

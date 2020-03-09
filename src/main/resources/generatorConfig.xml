@@ -76,13 +76,7 @@
         <!--enableDeleteByExample（默认true）：MyBatis3Simple为false，指定是否生成动态删除语句；-->
         <!--enableCountByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询总条数语句（用于分页的总条数查询）；-->
         <!--enableUpdateByExample（默认true）：MyBatis3Simple为false，指定是否生成动态修改语句（只修改对象中不为空的属性）；-->
-        <table tableName="foodsunsubscribe" domainObjectName="FoodSunSubscribe"
-                        enableCountByExample="true"
-                        enableUpdateByExample="true"
-                        enableDeleteByExample="true"
-                        enableSelectByExample="true"
-                        selectByExampleQueryId="true">
-        </table>
+
 
         <table tableName="foods" domainObjectName="Foods"
                enableCountByExample="true"
@@ -91,23 +85,6 @@
                enableSelectByExample="true"
                selectByExampleQueryId="true">
         </table>
-
-        <table tableName="message" domainObjectName="Message"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               enableDeleteByExample="true"
-               enableSelectByExample="true"
-               selectByExampleQueryId="true">
-        </table>
-
-        <table tableName="shopping" domainObjectName="Shopping"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               enableDeleteByExample="true"
-               enableSelectByExample="true"
-               selectByExampleQueryId="true">
-        </table>
-
         <table tableName="user" domainObjectName="User"
                enableCountByExample="true"
                enableUpdateByExample="true"
@@ -115,6 +92,7 @@
                enableSelectByExample="true"
                selectByExampleQueryId="true">
         </table>
+
 
         <!-- geelynote mybatis插件的搭建 -->
     </context>
