@@ -8,15 +8,10 @@ import org.springframework.context.ApplicationContext;
 @SpringBootTest
 class JsqiangApplicationTests {
 
-    @Autowired
-    ApplicationContext ioc;
 
     @Test
     void contextLoads() {
-        Object druidDataSource1 = ioc.getBean("druidDataSource");
 
-        boolean druidDataSource = ioc.containsBean("druidDataSource");
-        System.out.println(druidDataSource);
     }
 
 }
